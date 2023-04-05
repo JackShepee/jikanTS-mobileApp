@@ -9,7 +9,7 @@ interface State {
 
 const Seasons: React.FC = () => {
   const [anime, setAnimeList] = useState<State>({ animeList: [] });
-  const numColumns = 3;
+  const numColumns = 2;
 
   useEffect(() => {
     const fetchAnimeList = async () => {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 140,
+    height: 300,
     borderRadius: 5,
     marginVertical: 5,
   },
