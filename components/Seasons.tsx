@@ -9,7 +9,7 @@ interface State {
 
 const Seasons: React.FC = () => {
   const [anime, setAnimeList] = useState<State>({ animeList: [] });
-  const [numColumns, setNumColumns] = useState<number>(3);
+  const numColumns = 3;
 
   useEffect(() => {
     const fetchAnimeList = async () => {
