@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-const Profile: React.FC = () => (
+const Profile = () => (
   <View style={styles.container}>
     <Text style={styles.text}>This is Profile page!</Text>
   </View>

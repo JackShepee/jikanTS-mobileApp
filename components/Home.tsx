@@ -1,6 +1,6 @@
 import { View, Image, StyleSheet } from "react-native";
 
-const Home: React.FC = () => (
+const Home = () => (
   <View style={styles.container}>
     <Image
       source={{

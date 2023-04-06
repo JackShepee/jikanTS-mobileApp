@@ -7,7 +7,7 @@ interface State {
   animeList: Anime[];
 }
 
-const Seasons: React.FC = () => {
+const Seasons = () => {
   const [anime, setAnimeList] = useState<State>({ animeList: [] });
   const numColumns = 2;
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     padding: 10,
   },
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    marginTop: 15,
   },
   buttonContainer: {
     flexDirection: "row",

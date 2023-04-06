@@ -26,6 +26,7 @@ const App = () => {
           },
           shadowOpacity: 0.2,
           shadowRadius: 4,
+          height: 75,
         }}
       >
         <Tab.Screen
