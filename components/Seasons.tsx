@@ -1,7 +1,17 @@
-import { FlatList, StyleSheet, Text, View, Image } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { jikanClient } from "../lib/jikan";
 import { JikanResponse, Anime } from "@tutkli/jikan-ts";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
+import type { RootStackParamList } from "../lib/types";
 
 interface State {
   animeList: Anime[];
@@ -10,6 +20,7 @@ interface State {
 const Seasons = () => {
   const [anime, setAnimeList] = useState<State>({ animeList: [] });
   const numColumns = 2;
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     const fetchAnimeList = async () => {
@@ -25,14 +36,19 @@ const Seasons = () => {
   }, []);
 
   const renderAnimeItem = ({ item }: { item: Anime }) => (
-    <View style={[styles.item, { width: `${100 / numColumns}%` }]}>
+    <TouchableOpacity
+      style={[styles.item, { width: `${100 / numColumns}%` }]}
+      onPress={() => {
+        navigation.navigate("AnimeDetails", { mal_id: item.mal_id });
+      }}
+    >
       <Image source={{ uri: item.images.jpg.image_url }} style={styles.image} />
       <View style={styles.titleContainer}>
         <Text style={styles.titleAnime} numberOfLines={2}>
           {item.title}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

@@ -11,6 +11,9 @@ import {
 import { jikanClient } from "../lib/jikan";
 import { JikanTopParams } from "@tutkli/jikan-ts";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
+import type { RootStackParamList } from "../lib/types";
 
 interface State {
   topAnime: Anime[];
@@ -19,6 +22,7 @@ interface State {
 const TopAnime = () => {
   const [topAnimeList, setTopAnimeList] = useState<State>({ topAnime: [] });
   const [currPage, setCurrPage] = useState<number>(1);
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const searchParams: JikanTopParams = {
     page: currPage,
@@ -39,7 +43,12 @@ const TopAnime = () => {
   }, [currPage]);
 
   const renderTopAnime = ({ item }: { item: Anime }) => (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        navigation.navigate("AnimeDetails", { mal_id: item.mal_id });
+      }}
+    >
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: item.images.jpg.image_url }}
@@ -65,7 +74,7 @@ const TopAnime = () => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   const PaginationButtons = () => {
