@@ -1,9 +1,11 @@
 <h1>jikanTS-mobileApp</h1>
 <h2>Description</h2>
-jikanTS-mobileApp is a mobile application built using React Native and Typescript. The app allows users to browse and search for anime and manga titles using the Jikan API. It provides users with access to detailed information about anime and manga titles, including their synopsis, ratings, episode count, airing dates, and more.
+jikanTS-mobileApp is a mobile application built using React Native and Typescript. The app allows users to browse and search for anime and manga titles, constantly updating seasonal and top anime titles using the Jikan API. It provides users with access to detailed information about anime and manga titles, including their synopsis, ratings, episode count, airing dates, and more.
 
 <h2>Features</h2>
 <ul>
+  <li>Top anime list based on MAL rating</li>
+  <li>Currently airing animes</li>
   <li>Search for anime and manga titles</li>
   <li>View detailed information about anime and manga titles</li>
   <li>Add anime and manga titles to your favorites list</li>
