@@ -4,13 +4,15 @@ jikanTS-mobileApp is a mobile application built using React Native and Typescrip
 
 <h2>Features</h2>
 <ul>
+  <h3>Implemented</h3>
   <li>Top anime list based on MAL rating</li>
   <li>Currently airing animes</li>
-  <li>Search for anime and manga titles</li>
   <li>View detailed information about anime and manga titles</li>
+  <li>Dark mode support</li>
+  <h3>Work in progress</h3>
+  <li>Search for anime and manga titles</li>
   <li>Add anime and manga titles to your favorites list</li>
   <li>Browse your favorite anime and manga titles</li>
-  <li>Dark mode support</li>
 </ul>
 <h2>Installation</h2>
 <ol>
