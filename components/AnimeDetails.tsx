@@ -170,13 +170,13 @@ const styles = StyleSheet.create({
   },
   characterList: {
     paddingVertical: 10,
-    margin: 0,
+    gap: 10,
   },
   characterContainer: {
     margin: 0,
     alignItems: "center",
     backgroundColor: "#1E1E1E",
-    paddingRight: 10,
+    maxWidth: 100,
   },
   characterImage: {
     width: 100,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "#fff",
     borderWidth: 3,
-    alignSelf: "center",
+    alignSelf: "flex-start",
   },
   characterName: {
     fontSize: 16,
