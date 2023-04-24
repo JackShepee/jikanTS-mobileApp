@@ -8,7 +8,6 @@ jikanTS-mobileApp is a mobile application built using React Native and Typescrip
   <li>Top anime list based on MAL rating</li>
   <li>Currently airing animes</li>
   <li>View detailed information about anime and manga titles</li>
-  <li>Dark mode support</li>
   <h3>Work in progress</h3>
   <li>Search for anime and manga titles</li>
   <li>Add anime and manga titles to your favorites list</li>
@@ -18,7 +17,7 @@ jikanTS-mobileApp is a mobile application built using React Native and Typescrip
 <ol>
   <li>Clone the repository</li>
   <li>Install all dependecies: npm install</li>
-  <li>Run development server via Expo: npx expo start --tunnel</li>
+  <li>Run development server via Expo: npx expo start</li>
   <li>Run the app on a mobile device using Expo Go app</li>
 </ol>
 <h2>Technologies used</h2>
