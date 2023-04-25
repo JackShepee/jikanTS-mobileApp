@@ -1,4 +1,4 @@
-import { Anime, JikanResponse } from "@tutkli/jikan-ts";
+import { Anime, JikanResponse, JikanTopParams } from "@tutkli/jikan-ts";
 import { useEffect, useState } from "react";
 import {
   View,
@@ -9,11 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { jikanClient } from "../lib/jikan";
-import { JikanTopParams } from "@tutkli/jikan-ts";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 import type { RootStackParamList } from "../lib/types";
+import PaginationButtons from "./utils/PaginationButtons";
 
 interface State {
   topAnime: Anime[];
@@ -77,25 +77,6 @@ const TopAnime = () => {
     </TouchableOpacity>
   );
 
-  const PaginationButtons = () => {
-    return (
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setCurrPage(currPage === 1 ? currPage : currPage - 1)}
-        >
-          <Text style={styles.buttonText}> &#8592; Prev Page</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setCurrPage(currPage + 1)}
-        >
-          <Text style={styles.buttonText}>Next Page &#8594;</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -107,7 +88,9 @@ const TopAnime = () => {
         numColumns={1}
         renderItem={renderTopAnime}
         contentContainerStyle={styles.list}
-        ListFooterComponent={<PaginationButtons />}
+        ListFooterComponent={
+          <PaginationButtons currPage={currPage} setCurrPage={setCurrPage} />
+        }
       />
     </View>
   );
@@ -131,27 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 15,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 10,
-    paddingHorizontal: 10,
-  },
-  button: {
-    flex: 1,
-    borderRadius: 20,
-    backgroundColor: "#414052",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    marginHorizontal: 15,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
   },
   list: {
     paddingBottom: 50,

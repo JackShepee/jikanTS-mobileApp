@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 
-const Profile = () => (
+const SearchPage = () => (
   <View style={styles.container}>
-    <Text style={styles.text}>This is Profile page!</Text>
+    <Text style={styles.text}>This is Search page!</Text>
   </View>
 );
 
-export default Profile;
+export default SearchPage;
 
 const styles = StyleSheet.create({
   container: {

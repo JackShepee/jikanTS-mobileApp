@@ -8,10 +8,16 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { jikanClient } from "../lib/jikan";
-import { JikanResponse, Anime } from "@tutkli/jikan-ts";
+import {
+  JikanResponse,
+  Anime,
+  JikanSeasonsParams,
+  AnimeType,
+} from "@tutkli/jikan-ts";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 import type { RootStackParamList } from "../lib/types";
+import PaginationButtons from "./utils/PaginationButtons";
 
 interface State {
   animeList: Anime[];
@@ -19,13 +25,21 @@ interface State {
 
 const Seasons = () => {
   const [anime, setAnimeList] = useState<State>({ animeList: [] });
-  const numColumns = 2;
+  const [currPage, setCurrPage] = useState<number>(1);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const numColumns = 2;
+  const { tv } = AnimeType;
+
+  const searchParams: JikanSeasonsParams = {
+    page: currPage,
+    limit: 24,
+    filter: tv,
+  };
 
   useEffect(() => {
     const fetchAnimeList = async () => {
       await jikanClient.seasons
-        .getSeasonNow()
+        .getSeasonNow(searchParams)
         .then((response: JikanResponse<Anime[]>) => {
           setAnimeList({ animeList: response.data });
         })
@@ -33,7 +47,7 @@ const Seasons = () => {
     };
 
     fetchAnimeList();
-  }, []);
+  }, [currPage]);
 
   const renderAnimeItem = ({ item }: { item: Anime }) => (
     <TouchableOpacity
@@ -63,6 +77,9 @@ const Seasons = () => {
         renderItem={renderAnimeItem}
         contentContainerStyle={styles.list}
         columnWrapperStyle={styles.columnWrapper}
+        ListFooterComponent={
+          <PaginationButtons currPage={currPage} setCurrPage={setCurrPage} />
+        }
       />
     </View>
   );
@@ -86,9 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 15,
-  },
-  buttonContainer: {
-    flexDirection: "row",
   },
   item: {
     backgroundColor: "#212121",

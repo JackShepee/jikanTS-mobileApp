@@ -1,9 +1,8 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Seasons from "../Seasons";
 import Home from "../Home";
-import Profile from "../Profile";
+import SearchPage from "../Search";
 import TopAnime from "../TopAnime";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -34,7 +33,7 @@ const BottomNavBar = () => {
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => {
             return (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <MaterialCommunityIcons name="home" color={color} size={24} />
             );
           },
         }}
@@ -46,7 +45,7 @@ const BottomNavBar = () => {
           tabBarLabel: "Airing Now",
           tabBarIcon: ({ color }) => {
             return (
-              <MaterialCommunityIcons name="menu" color={color} size={26} />
+              <MaterialCommunityIcons name="menu" color={color} size={24} />
             );
           },
         }}
@@ -58,19 +57,23 @@ const BottomNavBar = () => {
           tabBarLabel: "Top Anime",
           tabBarIcon: ({ color }) => {
             return (
-              <MaterialCommunityIcons name="heart" color={color} size={26} />
+              <MaterialCommunityIcons name="heart" color={color} size={24} />
             );
           },
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={Profile}
+        name="Search"
+        component={SearchPage}
         options={{
-          tabBarLabel: "My Profile",
+          tabBarLabel: "Find Anime",
           tabBarIcon: ({ color }) => {
             return (
-              <MaterialCommunityIcons name="account" color={color} size={26} />
+              <MaterialCommunityIcons
+                name="movie-search"
+                color={color}
+                size={24}
+              />
             );
           },
         }}
