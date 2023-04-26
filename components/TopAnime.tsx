@@ -7,6 +7,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { jikanClient } from "../lib/jikan";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,6 +21,7 @@ interface State {
 }
 
 const TopAnime = () => {
+  const [loading, setLoading] = useState(false);
   const [topAnimeList, setTopAnimeList] = useState<State>({ topAnime: [] });
   const [currPage, setCurrPage] = useState<number>(1);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -31,12 +33,15 @@ const TopAnime = () => {
 
   useEffect(() => {
     const fetchTopAnime = async () => {
+      setLoading(true);
       await jikanClient.top
         .getTopAnime(searchParams)
         .then((response: JikanResponse<Anime[]>) => {
           setTopAnimeList({ topAnime: response.data });
+          setLoading(false);
         })
         .catch((error) => console.error(error));
+      setLoading(false);
     };
 
     fetchTopAnime();
@@ -82,16 +87,20 @@ const TopAnime = () => {
       <View style={styles.header}>
         <Text style={styles.title}>Top Anime List:</Text>
       </View>
-      <FlatList
-        data={topAnimeList.topAnime}
-        key={currPage}
-        numColumns={1}
-        renderItem={renderTopAnime}
-        contentContainerStyle={styles.list}
-        ListFooterComponent={
-          <PaginationButtons currPage={currPage} setCurrPage={setCurrPage} />
-        }
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <FlatList
+          data={topAnimeList.topAnime}
+          key={currPage}
+          numColumns={1}
+          renderItem={renderTopAnime}
+          contentContainerStyle={styles.list}
+          ListFooterComponent={
+            <PaginationButtons currPage={currPage} setCurrPage={setCurrPage} />
+          }
+        />
+      )}
     </View>
   );
 };
@@ -129,12 +138,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   imageContainer: {
-    width: "30%",
-    marginRight: 10,
+    width: "25%",
+    marginRight: 5,
   },
   image: {
     width: "100%",
-    resizeMode: "center",
+    resizeMode: "contain",
     height: 150,
     borderRadius: 5,
     marginVertical: 5,

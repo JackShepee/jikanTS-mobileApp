@@ -5,6 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { jikanClient } from "../lib/jikan";
@@ -24,6 +25,7 @@ interface State {
 }
 
 const Seasons = () => {
+  const [loading, setLoading] = useState(false);
   const [anime, setAnimeList] = useState<State>({ animeList: [] });
   const [currPage, setCurrPage] = useState<number>(1);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -38,12 +40,15 @@ const Seasons = () => {
 
   useEffect(() => {
     const fetchAnimeList = async () => {
+      setLoading(true);
       await jikanClient.seasons
         .getSeasonNow(searchParams)
         .then((response: JikanResponse<Anime[]>) => {
           setAnimeList({ animeList: response.data });
+          setLoading(false);
         })
         .catch((error) => console.error(error));
+      setLoading(false);
     };
 
     fetchAnimeList();
@@ -70,17 +75,21 @@ const Seasons = () => {
       <View style={styles.header}>
         <Text style={styles.title}>Current Season Airing List:</Text>
       </View>
-      <FlatList
-        data={anime.animeList}
-        key={numColumns}
-        numColumns={numColumns}
-        renderItem={renderAnimeItem}
-        contentContainerStyle={styles.list}
-        columnWrapperStyle={styles.columnWrapper}
-        ListFooterComponent={
-          <PaginationButtons currPage={currPage} setCurrPage={setCurrPage} />
-        }
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <FlatList
+          data={anime.animeList}
+          key={numColumns}
+          numColumns={numColumns}
+          renderItem={renderAnimeItem}
+          contentContainerStyle={styles.list}
+          columnWrapperStyle={styles.columnWrapper}
+          ListFooterComponent={
+            <PaginationButtons currPage={currPage} setCurrPage={setCurrPage} />
+          }
+        />
+      )}
     </View>
   );
 };
