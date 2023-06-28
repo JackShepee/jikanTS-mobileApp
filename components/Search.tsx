@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 const SearchPage = () => (
   <View style={styles.container}>
-    <Text style={styles.text}>This is Search page!</Text>
+    <Text style={styles.text}>TEMPLATE FOR SEARCH PAGE!</Text>
   </View>
 );
 
